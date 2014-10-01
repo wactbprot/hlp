@@ -25,12 +25,11 @@ function (doc, req) {
       if(Ndcvi > 1){
         for(var pi in dcvp){
           var dcvpi  = dcvp[jj]; // z.B. Pressure[0] Type ind (pi)
-          if(dcvpi.Value &&
-             dcvpi.Value.length > 0){
-            var dcvpiv  = dcvpi.Value;
+          if(dcvpi.Value ){
+            var dcvpiv  = typeof dcvpi.Value == "object" ? dcvpi.Value : [dcvpi.Value];
 
             var row = [p, dcvpi.Type, dcvpiv.join("|")
-                                      .replace(".",dec)]
+                                      .replace(/\./g,dec)]
                       .join("|")
                       .split("|");
             Nrow++;
@@ -40,9 +39,9 @@ function (doc, req) {
           jj++;
         }
       }else{
-        var dcvpv = dcvp.Value;
+        var dcvpv =  typeof dcvp.Value == "object" ? dcvp.Value : [dcvp.Value];
         var row = [p, dcvp.Type, dcvpv.join("|")
-                                 .replace(".",dec)]
+                                 .replace(/\./g,dec)]
                   .join("|")
                   .split("|");
         Nrow++;
