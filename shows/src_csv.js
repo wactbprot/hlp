@@ -1,10 +1,10 @@
 function (doc, req) {
 
   var rowarr  = [], colarr  = [],
-      sep  = req.query.sep || " ",
+      sep  = req.query.sep || "\t",
       src  = req.query.src || "Measurement",
-      eol  = req.query.eol || "\r\n",
-      dec  = ",",
+      eol  = req.query.eol || "\r",
+      dec  = req.query.dec || ",",
       dc   = doc.Calibration,
       Nrow = 0,
       Ncol = 0;
@@ -29,8 +29,8 @@ function (doc, req) {
              dcvpi.Value.length > 0){
             var dcvpiv  = dcvpi.Value;
 
-            var row = [p, dcvpi.Type, dcvpiv.join("|")
-                                      .replace(".",dec)]
+            var row = [p, dcvpi.Type, dcvpi.Unit, dcvpiv.join("|")
+                                      .replace(/\./g, dec)]
                       .join("|")
                       .split("|");
             Nrow++;
@@ -41,7 +41,7 @@ function (doc, req) {
         }
       }else{
         var dcvpv = dcvp.Value;
-        var row = [p, dcvp.Type, dcvpv.join("|")
+        var row = [p, dcvp.Type, dcvp.Unit, dcvpv.join("|")
                                  .replace(".",dec)]
                   .join("|")
                   .split("|");
