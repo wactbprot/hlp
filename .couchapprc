@@ -1,0 +1,10 @@
+{
+  "env": {
+    "default": {
+      "db": "http://localhost:5984/vl_db"
+       },	    
+      "server": {
+      "db": "http://a73434.berlin.ptb.de:5984/vl_db"
+    }
+  }
+}
